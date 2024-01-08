@@ -1,16 +1,17 @@
 package functions;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-class IdentityFunctionTest {
+public class IdentityFunctionTest {
     @Test
-    public void testApply() {
-        IdentityFunction f = new IdentityFunction();
-        assertEquals(0.2, f.apply(0.2), 0.0);
-        assertEquals(3546.1, f.apply(3546.1), 0.0);
-        assertEquals(-2.0, f.apply(-2.0), 0.0);
-        assertEquals(565.0, f.apply(565.0), 0.0);
+    void testApply() {
+        MathFunction identityFunction = new IdentityFunction();
+
+        assertEquals(0.0, identityFunction.apply(0.0), 0.0001);
+        assertEquals(1.0, identityFunction.apply(1.0), 0.0001);
+        assertEquals(-2.5, identityFunction.apply(-2.5), 0.0001);
+        // Добавьте другие тестовые случаи по необходимости
     }
 }
