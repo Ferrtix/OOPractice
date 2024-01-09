@@ -136,12 +136,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     protected int floorIndexOfX(double x) {
         if(x<getX(0)) return 0;
 
-        for(int i=0;i<count-2;++i){
+        for(int i=0;i<count-1;i++){
             if((x>getX(i))&&(x<getX(i+1))){
                 return i;
             }
         }
-        return count;
+        return count-1;
     }
     @Override
     protected double extrapolateLeft(double x) {
@@ -184,16 +184,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     public double apply(double x) {
-        double res=0.0;
+        double res = 0.0;
         if (x < getX(0)) {
-            res=extrapolateLeft(x);
-        }else if(x> getX(count-1)){
-            res=extrapolateRight(x);
+            res = extrapolateLeft(x);
+        }else if(x > getX(count-1)){
+            res = extrapolateRight(x);
         }else {
             if(indexOfX(x)!=-1){
                 res = getY(indexOfX(x));
             }else{
-                res=interpolate(x,floorIndexOfX(x));
+                res = interpolate(x,floorIndexOfX(x));
             }
         }
         return res;
