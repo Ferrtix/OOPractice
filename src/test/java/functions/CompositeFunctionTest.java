@@ -15,5 +15,14 @@ class CompositeFunctionTest {
         assertEquals(0, comp.apply(Math.PI/4), 0.00001);
         assertEquals(Math.log(Math.sqrt(3)), comp.apply(Math.PI/6), 0.00001);
         assertEquals(Math.log(1/Math.sqrt(3)), comp.apply(Math.PI/3), 0.00001);
+
+        double[] ArrX = {1, 3, 5, 7};
+        double[] ArrY = {2, 4, 6, 8};
+        LinkedListTabulatedFunction linkedList = new LinkedListTabulatedFunction(ArrX, ArrY);
+        MathFunction sqr = new SqrFunction();
+        MathFunction comp2 = new CompositeFunction(linkedList, sqr);
+
+        assertEquals(Math.sqrt(14.0), comp2.apply(13.0), 0.00001);
+        assertEquals(Math.sqrt(7.0), comp2.apply(6.0), 0.00001);
     }
 }

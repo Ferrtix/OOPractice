@@ -24,7 +24,12 @@ class LinkedListTabulatedFunctionTest {
         assertEquals(6.0, linkedList.getY(2), 0.00001);
     }
 
-
+    @Test
+    public void setY() {
+        linkedList.setY(3, 10);
+        assertEquals(10.0, linkedList.getY(3), 0.00001);
+        linkedList.setY(3, 8);
+    }
 
     @Test
     public void leftBound() {
@@ -74,12 +79,5 @@ class LinkedListTabulatedFunctionTest {
         assertEquals(-1.0, linkedList.apply(-2.0), 0.00001);
         assertEquals(14.0, linkedList.apply(13.0), 0.00001);
         assertEquals(7.0, linkedList.apply(6.0), 0.00001);
-    }
-
-    @Test
-    public void setY() {
-        linkedList.setY(3, 10);
-        assertEquals(10.0, linkedList.getY(3), 0.00001);
-
     }
 }
