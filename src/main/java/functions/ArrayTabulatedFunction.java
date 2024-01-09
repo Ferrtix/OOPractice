@@ -80,6 +80,16 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
 
     @Override
+    public int indexOfY(double y) {
+        for(int i=0;i<yValues.length-1;++i){
+            if(Double.compare(y,yValues[i])==0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
     protected int floorIndexOfX(double x) {
         if(x<xValues[0]) return 0;
         for(int i=0;i<xValues.length-2;++i){
@@ -104,4 +114,27 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     protected double interpolate(double x, int floorIndex) {
         return (yValues[floorIndex]+((yValues[floorIndex]-yValues[floorIndex-1])/(xValues[floorIndex]-xValues[floorIndex-1]))*(x-xValues[floorIndex-1]));
     }
+
+    @Override
+    protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
+        return (leftY+((rightY-leftY)/(rightX-leftX))*(x-leftX));
+    }
+
+    @Override
+    public double apply(double x) {
+        double res=0.0;
+        if (x < xValues[0]) {
+        res=extrapolateLeft(x);
+        }else if(x> xValues[count-1]){
+            res=extrapolateRight(x);
+        }else {
+            if(indexOfX(x)!=-1){
+             res = getY(indexOfX(x));
+            }else{
+                res=interpolate(x,floorIndexOfX(x));
+            }
+        }
+        return res;
+    }
+
 }
