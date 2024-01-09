@@ -228,4 +228,57 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
         return res;
     }
+
+    public String toString() {
+        String result = "";
+        Node temp = head;
+        do {
+            result += temp.toString() + " ";
+            temp = temp.next;
+        } while (temp != head);
+
+        return result;
+    }
+
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (getClass() != o.getClass())
+            return false;
+        LinkedListTabulatedFunction linkedList2 = (LinkedListTabulatedFunction)o;
+        if (linkedList2.count != count)
+            return false;
+        Node temp1 = head;
+        Node temp2 = linkedList2.head;
+        for (int i = 0; i < count; i++) {
+            if (temp1.x != temp2.x || temp1.y != temp2.y)
+                return false;
+            temp1 = temp1.next;
+            temp2 = temp2.next;
+        }
+        return true;
+    }
+
+    public int hashCode() {
+        int result = 0;
+        Node temp = head;
+        do {
+            result += temp.hashCode();
+            temp = temp.next;
+        } while(temp != head);
+        return result;
+    }
+
+    public Object clone() {
+        double[] arrX = new double[count];
+        double[] arrY = new double[count];
+        Node temp = head;
+        for (int i = 0; i < count; i++) {
+            arrX[i] = temp.x;
+            arrY[i] = temp.y;
+            temp = temp.next;
+        }
+        LinkedListTabulatedFunction Clone = new LinkedListTabulatedFunction(arrX, arrY);
+        return Clone;
+    }
 }

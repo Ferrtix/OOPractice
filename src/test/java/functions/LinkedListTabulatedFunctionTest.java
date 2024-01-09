@@ -86,13 +86,13 @@ class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void toString_Test() {
+    public void toString_NodeTest() {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(10.0, 77.7);
         assertEquals("(10.0, 77.7)", node.toString());
     }
 
     @Test
-    public void equals_Test() {
+    public void equals_NodeTest() {
         LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1, 2);
         LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 2);
         LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(1, 3);
@@ -101,7 +101,7 @@ class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void hashCode_Test() {
+    public void hashCode_NodeTest() {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1, 2);
         LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 2);
         LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(1, 3);
@@ -110,12 +110,44 @@ class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void clone_Test() {
+    public void clone_NodeTest() {
         LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1, 2);
         LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 3);
         Object Copy1 = node1.clone();
         Object Copy2 = node2.clone();
         assertEquals(node1, Copy1);
         assertNotEquals(node1, Copy2);
+    }
+
+    @Test
+    public void ToString_ListTest() {
+        assertEquals("(1.0, 2.0) (3.0, 4.0) (5.0, 6.0) (7.0, 8.0) ", linkedList.toString());
+        assertNotEquals("(1.0, 3.0) (3.0, 4.0) (5.0, 6.0) (7.0, 8.0) ", linkedList.toString());
+    }
+
+    @Test
+    public void equals_ListTest() {
+        double[] ArrX2 = {1, 2, 3, 4};
+        double[] ArrY2 = {8, 9, 10, 11};
+        LinkedListTabulatedFunction List2 = new LinkedListTabulatedFunction(ArrX, ArrY);
+        LinkedListTabulatedFunction List3 = new LinkedListTabulatedFunction(ArrX2, ArrY2);
+        assertTrue(linkedList.equals(List2));
+        assertFalse(linkedList.equals(List3));
+    }
+
+    @Test
+    public void ListHashCodeTest() {
+        double[] ArrX2 = {1, 2, 3, 4};
+        double[] ArrY2 = {8, 9, 10, 11};
+        LinkedListTabulatedFunction List2 = new LinkedListTabulatedFunction(ArrX, ArrY);
+        LinkedListTabulatedFunction List3 = new LinkedListTabulatedFunction(ArrX2, ArrY2);
+        assertEquals(linkedList.hashCode(), List2.hashCode());
+        assertNotEquals(linkedList.hashCode(), List3.hashCode());
+    }
+
+    @Test
+    public void ListCloneTest() {
+        Object Clone = linkedList.clone();
+        assertEquals(linkedList, Clone);
     }
 }
