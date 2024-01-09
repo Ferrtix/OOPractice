@@ -69,8 +69,12 @@ class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void interpolate() {
+    public void interpolate1() {
         assertEquals(7.0, linkedList.interpolate(6.0, 2), 0.00001);
+    }
+
+    @Test
+    public void interpolate2() {
         assertEquals(19.0/3.0, linkedList.interpolate(3.0, 1, 4, 3, 8), 0.00001);
     }
 
@@ -79,5 +83,39 @@ class LinkedListTabulatedFunctionTest {
         assertEquals(-1.0, linkedList.apply(-2.0), 0.00001);
         assertEquals(14.0, linkedList.apply(13.0), 0.00001);
         assertEquals(7.0, linkedList.apply(6.0), 0.00001);
+    }
+
+    @Test
+    public void toString_Test() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(10.0, 77.7);
+        assertEquals("(10.0, 77.7)", node.toString());
+    }
+
+    @Test
+    public void equals_Test() {
+        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1, 2);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 2);
+        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(1, 3);
+        assertTrue(node1.equals(node2));
+        assertFalse(node1.equals(node3));
+    }
+
+    @Test
+    public void hashCode_Test() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1, 2);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 2);
+        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(1, 3);
+        assertEquals(node.hashCode(), node2.hashCode());
+        assertNotEquals(node.hashCode(), node3.hashCode());
+    }
+
+    @Test
+    public void clone_Test() {
+        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1, 2);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 3);
+        Object Copy1 = node1.clone();
+        Object Copy2 = node2.clone();
+        assertEquals(node1, Copy1);
+        assertNotEquals(node1, Copy2);
     }
 }

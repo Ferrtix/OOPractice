@@ -1,5 +1,7 @@
 package functions;
 
+import java.util.Objects;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction{
 
     static class Node {
@@ -11,6 +13,34 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         Node(double x, double y) {
             this.x = x;
             this.y = y;
+        }
+
+        public String toString() {
+            String strX = String.valueOf(x);
+            String strY = String.valueOf(y);
+            return "(" + strX + ", " + strY + ")";
+        }
+
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (getClass() == o.getClass()) {
+                Node node = (Node)o;
+                return Double.compare(x, node.x) == Double.compare(y, node.y) == Objects.equals(next, node.next) == Objects.equals(prev, node.prev);
+            }
+            else {
+                return false;
+            }
+        }
+
+        public int hashCode() {
+            return Double.hashCode(x) | Double.hashCode(y);
+        }
+
+        public Object clone() {
+            Node Clone = new Node(x, y);
+            Clone.prev = prev;
+            Clone.next = next;
+            return Clone;
         }
     }
 
