@@ -12,6 +12,6 @@ public class IdentityFunctionTest {
         assertEquals(0.0, identityFunction.apply(0.0), 0.0001);
         assertEquals(1.0, identityFunction.apply(1.0), 0.0001);
         assertEquals(-2.5, identityFunction.apply(-2.5), 0.0001);
-        // Добавьте другие тестовые случаи по необходимости
+
     }
 }
