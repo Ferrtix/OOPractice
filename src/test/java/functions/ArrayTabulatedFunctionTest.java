@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ArrayTabulatedFunctionTest {
 
     double[] x = {1, 2, 3, 4, 5};
-    double[] y= {1, 4, 9, 16, 25};
+    double[] y = {1, 4, 9, 16, 25};
     ArrayTabulatedFunction Array=new ArrayTabulatedFunction(x,y);
 
 
@@ -85,5 +85,38 @@ class ArrayTabulatedFunctionTest {
         assertEquals(1.5*1.5, Array.apply(1), 5.001);
         assertEquals(6.3*6.3, Array.apply(6.3), 5.001);
         assertEquals(0, Array.apply(0), 5.001);
+    }
+
+    @Test
+    public void ArrayException_Test() {
+        boolean isException = false;
+        double[] x2 = {1};
+        double[] y2 = {2};
+        try {
+            ArrayTabulatedFunction arrExp1 = new ArrayTabulatedFunction(x2, y2);
+        } catch (IllegalArgumentException exception) {
+            isException = true;
+        }
+        assertTrue(isException);
+
+        isException = false;
+        double[] x3 = {1, 2, 3, 4};
+        double[] y3 = {1, 2, 3};
+        try {
+            ArrayTabulatedFunction arrExp2 = new ArrayTabulatedFunction(x3, y3);
+        } catch (IllegalArgumentException exception) {
+            isException = true;
+        }
+        assertTrue(isException);
+
+        isException = false;
+        double[] x4 = {1, 5, 2, 7};
+        double[] y4 = {1, 2, 3, 4};
+        try {
+            ArrayTabulatedFunction arrExp3 = new ArrayTabulatedFunction(x4, y4);
+        } catch (IllegalArgumentException exception) {
+            isException = true;
+        }
+        assertTrue(isException);
     }
 }
