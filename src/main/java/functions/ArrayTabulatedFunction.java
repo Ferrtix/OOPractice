@@ -41,7 +41,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public int GetCount() {
-        return count;
+        return this.count;
     }
 
     @Override

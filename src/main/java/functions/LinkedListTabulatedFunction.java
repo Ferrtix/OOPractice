@@ -7,6 +7,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     static class Node {
         public Node next;
         public Node prev;
+
         public double x;
         public double y;
 
@@ -36,7 +37,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             return Double.hashCode(x) | Double.hashCode(y);
         }
 
-        public Object clone() {
+        public Object clone(){
             Node Clone = new Node(x, y);
             Clone.prev = prev;
             Clone.next = next;
