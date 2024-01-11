@@ -300,7 +300,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             arrY[i] = temp.y;
             temp = temp.next;
         }
-        LinkedListTabulatedFunction Clone = new LinkedListTabulatedFunction(arrX, arrY);
-        return Clone;
+        return new LinkedListTabulatedFunction(arrX, arrY);
     }
 }

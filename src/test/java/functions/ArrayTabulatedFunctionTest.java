@@ -82,9 +82,9 @@ class ArrayTabulatedFunctionTest {
 
     @Test
     void apply() {
-        assertEquals(1.5*1.5, Array.apply(1), 5.001);
-        assertEquals(6.3*6.3, Array.apply(6.3), 5.001);
-        assertEquals(0, Array.apply(0), 5.001);
+        assertEquals(1, Array.apply(1), 4.001);
+        assertEquals(6.2*6.2, Array.apply(6.2), 4.00001);
+        assertEquals(0, Array.apply(0), 4.001);
     }
 
     @Test
@@ -118,5 +118,38 @@ class ArrayTabulatedFunctionTest {
             isException = true;
         }
         assertTrue(isException);
+    }
+
+    @Test
+    void testToString() {
+//        double[] x = {1, 2, 3, 4, 5};
+//        double[] y = {1, 4, 9, 16, 25};
+//        ArrayTabulatedFunction Array=new ArrayTabulatedFunction(x,y);
+        //String s=Array.toString();
+        //System.out.println(s);
+        assertEquals("(1.0,1.0)(2.0,4.0)(3.0,9.0)(4.0,16.0)(5.0,25.0)",Array.toString());
+
+    }
+
+    @Test
+    void testEquals() {
+    ArrayTabulatedFunction Array2 = new ArrayTabulatedFunction(x,y);
+        ArrayTabulatedFunction Array3 = new ArrayTabulatedFunction(y,x);
+        assertTrue(Array2.equals(Array));
+        assertFalse(Array3.equals(Array));
+
+    }
+
+    @Test
+    void testHashCode() {
+        //int a=Array.hashCode();
+        //System.out.println(a);
+        assertEquals(75,Array.hashCode());
+    }
+
+    @Test
+    void testClone() {
+        Object Clone = Array.clone();
+        assertEquals(Array, Clone);
     }
 }

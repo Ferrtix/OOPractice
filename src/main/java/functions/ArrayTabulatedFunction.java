@@ -160,4 +160,36 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         }
         return res;
     }
+
+    public String toString(){
+        String str="";
+        for(int i=0;i<this.count;++i){
+            str+= "("+String.valueOf(this.xValues[i])+","+String.valueOf(this.yValues[i])+")";
+        }
+        return str;
+    }
+
+    public boolean equals(Object o){
+        if(o.getClass()!=this.getClass())return false;
+        ArrayTabulatedFunction temp = (ArrayTabulatedFunction)o;
+        if(temp.count!=count)return false;
+        for(int i=0;i<count;++i) {
+            if((temp.xValues[i]!=this.xValues[i])||temp.yValues[i]!=this.yValues[i])return false;
+        }
+        return true;
+    }
+
+    public int hashCode(){
+        double result = 0;
+        for(int i=0;i<count;++i){
+          result+=xValues[i]+yValues[i]+1;
+        }
+        return (int)result;
+    }
+
+    public Object clone(){
+        ArrayTabulatedFunction temp=new ArrayTabulatedFunction(this.xValues,this.yValues);
+        temp.count=count;
+        return (Object)temp;
+    }
 }

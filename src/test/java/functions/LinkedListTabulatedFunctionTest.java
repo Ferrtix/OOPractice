@@ -90,31 +90,25 @@ class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(10.0, 77.7);
         assertEquals("(10.0, 77.7)", node.toString());
     }
-
+    LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1, 2);
+    LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 2);
+    LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(1, 3);
     @Test
     public void equals_NodeTest() {
-        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1, 2);
-        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 2);
-        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(1, 3);
         assertTrue(node1.equals(node2));
         assertFalse(node1.equals(node3));
     }
 
     @Test
     public void hashCode_NodeTest() {
-        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1, 2);
-        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 2);
-        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(1, 3);
-        assertEquals(node.hashCode(), node2.hashCode());
-        assertNotEquals(node.hashCode(), node3.hashCode());
+        assertEquals(node1.hashCode(), node2.hashCode());
+        assertNotEquals(node1.hashCode(), node3.hashCode());
     }
 
     @Test
     public void clone_NodeTest() {
-        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1, 2);
-        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 3);
         Object Copy1 = node1.clone();
-        Object Copy2 = node2.clone();
+        Object Copy2 = node3.clone();
         assertEquals(node1, Copy1);
         assertNotEquals(node1, Copy2);
     }
