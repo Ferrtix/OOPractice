@@ -15,7 +15,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     private int count;
 
-    ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+    public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if(xValues.length < 2)
             throw new IllegalArgumentException("length less than 2");
         ArrayTabulatedFunction.checkLengthIsTheSame(xValues,yValues);
@@ -25,7 +25,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         count = xValues.length;
     }
 
-    ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
+    public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
         if(count < 2)
             throw new IllegalArgumentException("length less than 2");
         if(xFrom>xTo) {double temp=xFrom;xFrom=xTo;xTo=temp;}
