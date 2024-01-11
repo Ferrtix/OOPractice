@@ -12,12 +12,23 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     private int count;
 
     ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        this.xValues=Arrays.copyOf(xValues,xValues.length);
-        this.yValues=Arrays.copyOf(yValues,yValues.length);
-        count=xValues.length;
+        if(xValues.length < 2)
+            throw new IllegalArgumentException("length less than 2");
+        if(xValues.length != yValues.length)
+            throw new IllegalArgumentException("length isn't same");
+        for(int i=1; i<xValues.length; i++) {
+            if(xValues[i-1] > xValues[i]) {
+                throw new IllegalArgumentException("x values isn't sorted");
+            }
+        }
+        this.xValues = Arrays.copyOf(xValues,xValues.length);
+        this.yValues = Arrays.copyOf(yValues,yValues.length);
+        count = xValues.length;
     }
 
     ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
+        if(count < 2)
+            throw new IllegalArgumentException("length less than 2");
         if(xFrom>xTo) {double temp=xFrom;xFrom=xTo;xTo=temp;}
         this.xValues=new double[count];
         this.yValues=new double[count];
@@ -46,17 +57,23 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public double getX(int index) {
+        if (index < 0 || index > count - 1)
+            throw new IllegalArgumentException("Index out of range");
         return xValues[index];
     }
 
     @Override
     public double getY(int index) {
+        if (index < 0 || index > count - 1)
+            throw new IllegalArgumentException("Index out of range");
         return yValues[index];
     }
 
     @Override
     public void setY(int index, double value) {
-        yValues[index]=value;
+        if (index < 0 || index > count - 1)
+            throw new IllegalArgumentException("Index out of range");
+        yValues[index] = value;
     }
 
     @Override
@@ -91,7 +108,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     protected int floorIndexOfX(double x) {
-        if(x<xValues[0]) return 0;
+        if (x < getX(0))
+            throw new IllegalArgumentException("X out of range");
         for(int i=0;i<xValues.length-1;++i){
             if((x>xValues[i])&&(x<xValues[i+1])){
                 return i;
@@ -102,16 +120,22 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     protected double extrapolateLeft(double x) {
+        if (x > getX(0))
+            throw new IllegalArgumentException("X out of range");
         return (yValues[0]+((yValues[1]-yValues[0])/(xValues[1]-xValues[0]))*(x-xValues[0]));
     }
 
     @Override
     protected double extrapolateRight(double x) {
+        if (x < getX(count - 1))
+            throw new IllegalArgumentException("X out of range");
         return (yValues[count-2]+((yValues[count-1]-yValues[count-2])/(xValues[count-1]-xValues[count-2]))*(x-xValues[count-2]));
     }
 
     @Override
     protected double interpolate(double x, int floorIndex) {
+        if (floorIndex < 1 || floorIndex > count - 1)
+            throw new IllegalArgumentException("Index out of range");
         return (yValues[floorIndex-1]+((yValues[floorIndex]-yValues[floorIndex-1])/(xValues[floorIndex]-xValues[floorIndex-1]))*(x-xValues[floorIndex-1]));
     }
 
@@ -136,5 +160,4 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         }
         return res;
     }
-
 }

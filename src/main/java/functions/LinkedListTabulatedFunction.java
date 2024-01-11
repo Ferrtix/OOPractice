@@ -65,6 +65,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     Node getNode(int index) {
+        if (index < 0 || index > count - 1)
+            throw new IllegalArgumentException("Index out of range");
         if (index == 0) {
             return head;
         }
@@ -76,6 +78,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        if(xValues.length < 2)
+            throw new IllegalArgumentException("length less than 2");
+        if(xValues.length != yValues.length)
+            throw new IllegalArgumentException("length isn't same");
+        for(int i=1; i<xValues.length; i++) {
+            if(xValues[i-1] > xValues[i]) {
+                throw new IllegalArgumentException("x values isn't sorted");
+            }
+        }
         for(int i=0; i<xValues.length; i++) {
             addNode(xValues[i], yValues[i]);
         }
@@ -83,21 +94,24 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        if(xFrom>xTo) {
+        if(count < 2)
+            throw new IllegalArgumentException("length less than 2");
+
+        if(xFrom > xTo) {
             double temp=xFrom;
             xFrom=xTo;
             xTo=temp;
         }
 
-        if(xFrom==xTo) {
+        if(xFrom == xTo) {
             for(int i=0;i<count;++i) {
                 addNode(xFrom, source.apply(xFrom));
             }
         }
         else {
-            double step = (xTo-xFrom)/(count-1);
+            double step = (xTo - xFrom)/(count - 1);
             int i=0;
-            for(double x=xFrom; x<=(xTo+step/2); x+=step) {
+            for(double x = xFrom; x <= (xTo + step/2); x += step) {
                 addNode(x, source.apply(x));
                 ++i;
             }
@@ -147,7 +161,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
     @Override
     public int indexOfX(double x) {
-        for(int i=0;i<count-1;++i){
+        for(int i = 0;i < count-1; ++i){
             if(Double.compare(x, getX(i))==0){
                 return i;
             }
@@ -156,7 +170,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
     @Override
     public int indexOfY(double y) {
-        for(int i=0;i<count-1;++i){
+        for(int i = 0; i < count-1; ++i){
             if(Double.compare(y,getY(i))==0){
                 return i;
             }
@@ -165,10 +179,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
     @Override
     protected int floorIndexOfX(double x) {
-        if(x<getX(0)) return 0;
+        if (x < getX(0))
+            throw new IllegalArgumentException("X out of range");
 
         for(int i=0;i<count-1;i++){
-            if((x>getX(i))&&(x<getX(i+1))){
+            if((x > getX(i)) && (x < getX(i+1))){
                 return i;
             }
         }
@@ -176,6 +191,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
     @Override
     protected double extrapolateLeft(double x) {
+        if (x > getX(0))
+            throw new IllegalArgumentException("X out of range");
         if (head.next == head) {
             return head.y;
         } else {
@@ -186,6 +203,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected double extrapolateRight(double x) {
+        if (x < getX(count - 1))
+            throw new IllegalArgumentException("X out of range");
         if (head.next == head) {
             return head.y;
         } else {
@@ -196,6 +215,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected double interpolate(double x, int floorIndex) {
+        if (floorIndex < 1 || floorIndex > count - 1)
+            throw new IllegalArgumentException("Index out of range");
         if (head.next == head) {
             return head.y;
         } else {

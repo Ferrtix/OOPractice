@@ -150,4 +150,37 @@ class LinkedListTabulatedFunctionTest {
         Object Clone = linkedList.clone();
         assertEquals(linkedList, Clone);
     }
+
+    @Test
+    public void LinkedListException_Test() {
+        boolean isException = false;
+        double[] x2 = {1};
+        double[] y2 = {2};
+        try {
+            LinkedListTabulatedFunction listExp1 = new LinkedListTabulatedFunction(x2, y2);
+        } catch (IllegalArgumentException exception) {
+            isException = true;
+        }
+        assertTrue(isException);
+
+        isException = false;
+        double[] x3 = {1, 2, 3, 4};
+        double[] y3 = {1, 2, 3};
+        try {
+            LinkedListTabulatedFunction listExp1 = new LinkedListTabulatedFunction(x3, y3);
+        } catch (IllegalArgumentException exception) {
+            isException = true;
+        }
+        assertTrue(isException);
+
+        isException = false;
+        double[] x4 = {1, 5, 2, 7};
+        double[] y4 = {1, 2, 3, 4};
+        try {
+            LinkedListTabulatedFunction listExp1 = new LinkedListTabulatedFunction(x4, y4);
+        } catch (IllegalArgumentException exception) {
+            isException = true;
+        }
+        assertTrue(isException);
+    }
 }
