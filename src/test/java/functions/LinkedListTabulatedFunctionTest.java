@@ -5,6 +5,8 @@ import exceptions.DifferentLengthOfArraysException;
 import exceptions.InterpolationException;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedListTabulatedFunctionTest {
@@ -186,5 +188,23 @@ class LinkedListTabulatedFunctionTest {
             isException = true;
         }
         assertTrue(isException);
+    }
+
+    @Test
+    public void LinkedListIteratorTestException() {
+        Iterator<Point> iterator = linkedList.iterator();
+        LinkedListTabulatedFunction.Node node = linkedList.getNode(0);
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(node.x, point.x);
+            assertEquals(node.y, point.y);
+            node = node.next;
+        }
+        node = linkedList.getNode(0);
+        for (Point point : linkedList) {
+            assertEquals(node.x, point.x);
+            assertEquals(node.y, point.y);
+            node = node.next;
+        }
     }
 }
