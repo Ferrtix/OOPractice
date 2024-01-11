@@ -1,5 +1,8 @@
 package functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,11 +75,18 @@ class ArrayTabulatedFunctionTest {
 
     @Test
     void interpolate() {
-        assertEquals(3.1*3.1, Array.interpolate(3.1, 2), 5.01);
+        boolean isException = false;
+        try {
+            assertEquals(4.2*4.2, Array.interpolate(4.2, 4), 5.01);
+        } catch (InterpolationException exception) {
+            isException = true;
+        }
+        assertFalse(isException);
     }
 
     @Test
     void Interpolate2() {
+
         assertEquals(1.4*1.4, Array.interpolate(1.4, 1,2,1,4), 5.1);
     }
 
@@ -104,7 +114,7 @@ class ArrayTabulatedFunctionTest {
         double[] y3 = {1, 2, 3};
         try {
             ArrayTabulatedFunction arrExp2 = new ArrayTabulatedFunction(x3, y3);
-        } catch (IllegalArgumentException exception) {
+        } catch (DifferentLengthOfArraysException exception) {
             isException = true;
         }
         assertTrue(isException);
@@ -114,7 +124,7 @@ class ArrayTabulatedFunctionTest {
         double[] y4 = {1, 2, 3, 4};
         try {
             ArrayTabulatedFunction arrExp3 = new ArrayTabulatedFunction(x4, y4);
-        } catch (IllegalArgumentException exception) {
+        } catch (ArrayIsNotSortedException exception) {
             isException = true;
         }
         assertTrue(isException);

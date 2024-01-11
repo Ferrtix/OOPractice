@@ -1,5 +1,8 @@
 package functions;
 
+import exceptions.ArrayIsNotSortedException;
+import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,7 +73,14 @@ class LinkedListTabulatedFunctionTest {
 
     @Test
     public void interpolate1() {
-        assertEquals(7.0, linkedList.interpolate(6.0, 2), 0.00001);
+        boolean isException = false;
+        try {
+            assertEquals(7.0, linkedList.interpolate(6.0, 2), 0.00001);
+        } catch (InterpolationException exception) {
+            isException = true;
+        }
+        assertFalse(isException);
+
     }
 
     @Test
@@ -162,7 +172,7 @@ class LinkedListTabulatedFunctionTest {
         double[] y3 = {1, 2, 3};
         try {
             LinkedListTabulatedFunction listExp1 = new LinkedListTabulatedFunction(x3, y3);
-        } catch (IllegalArgumentException exception) {
+        } catch (DifferentLengthOfArraysException exception) {
             isException = true;
         }
         assertTrue(isException);
@@ -172,7 +182,7 @@ class LinkedListTabulatedFunctionTest {
         double[] y4 = {1, 2, 3, 4};
         try {
             LinkedListTabulatedFunction listExp1 = new LinkedListTabulatedFunction(x4, y4);
-        } catch (IllegalArgumentException exception) {
+        } catch (ArrayIsNotSortedException exception) {
             isException = true;
         }
         assertTrue(isException);

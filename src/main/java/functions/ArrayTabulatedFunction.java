@@ -1,5 +1,7 @@
 package functions;
 
+import exceptions.InterpolationException;
+
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,13 +16,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         if(xValues.length < 2)
             throw new IllegalArgumentException("length less than 2");
-        if(xValues.length != yValues.length)
-            throw new IllegalArgumentException("length isn't same");
-        for(int i=1; i<xValues.length; i++) {
-            if(xValues[i-1] > xValues[i]) {
-                throw new IllegalArgumentException("x values isn't sorted");
-            }
-        }
+        ArrayTabulatedFunction.checkLengthIsTheSame(xValues,yValues);
+        ArrayTabulatedFunction.checkSorted(xValues);
         this.xValues = Arrays.copyOf(xValues,xValues.length);
         this.yValues = Arrays.copyOf(yValues,yValues.length);
         count = xValues.length;
@@ -135,7 +132,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     @Override
     protected double interpolate(double x, int floorIndex) {
         if (floorIndex < 1 || floorIndex > count - 1)
-            throw new IllegalArgumentException("Index out of range");
+            throw new InterpolationException();
         return (yValues[floorIndex-1]+((yValues[floorIndex]-yValues[floorIndex-1])/(xValues[floorIndex]-xValues[floorIndex-1]))*(x-xValues[floorIndex-1]));
     }
 

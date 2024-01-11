@@ -1,5 +1,7 @@
 package functions;
 
+import exceptions.InterpolationException;
+
 import java.util.Objects;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction{
@@ -80,13 +82,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         if(xValues.length < 2)
             throw new IllegalArgumentException("length less than 2");
-        if(xValues.length != yValues.length)
-            throw new IllegalArgumentException("length isn't same");
-        for(int i=1; i<xValues.length; i++) {
-            if(xValues[i-1] > xValues[i]) {
-                throw new IllegalArgumentException("x values isn't sorted");
-            }
-        }
+        ArrayTabulatedFunction.checkLengthIsTheSame(xValues,yValues);
+        ArrayTabulatedFunction.checkSorted(xValues);
         for(int i=0; i<xValues.length; i++) {
             addNode(xValues[i], yValues[i]);
         }
@@ -216,7 +213,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     @Override
     protected double interpolate(double x, int floorIndex) {
         if (floorIndex < 1 || floorIndex > count - 1)
-            throw new IllegalArgumentException("Index out of range");
+            throw new InterpolationException();
         if (head.next == head) {
             return head.y;
         } else {
