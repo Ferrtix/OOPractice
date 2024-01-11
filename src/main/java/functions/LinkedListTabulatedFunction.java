@@ -1,5 +1,7 @@
 package functions;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction{
@@ -301,5 +303,26 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             temp = temp.next;
         }
         return new LinkedListTabulatedFunction(arrX, arrY);
+    }
+
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
+            private Node node = head;
+
+            @Override
+            public boolean hasNext() {
+                return node != null;
+            }
+
+            @Override
+            public Point next() {
+                if (hasNext()) {
+                    Point point = new Point(node.x, node.y);
+                    if (node.next == head) node = null;
+                    else node = node.next;
+                    return point;
+                } else throw new NoSuchElementException();
+            }
+        };
     }
 }
