@@ -3,6 +3,8 @@ package functions;
 import exceptions.InterpolationException;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -188,5 +190,10 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         ArrayTabulatedFunction temp=new ArrayTabulatedFunction(this.xValues,this.yValues);
         temp.count=count;
         return (Object)temp;
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 }
