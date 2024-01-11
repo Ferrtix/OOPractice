@@ -13,13 +13,10 @@ class LinkedListTabulatedFunctionFactoryTest {
     @Test
     public void create() {
         TabulatedFunctionFactory factory = new LinkedListTabulatedFunctionFactory();
-        TabulatedFunction function = factory.create(xValues, yValues);
-        LinkedListTabulatedFunction function2 = new LinkedListTabulatedFunction(xValues, yValues);
+        TabulatedFunction list = factory.create(xValues, yValues);
+        LinkedListTabulatedFunction list2 = new LinkedListTabulatedFunction(xValues, yValues);
 
-        assertTrue(function instanceof LinkedListTabulatedFunction);
-
-        for (int i = 0; i < xValues.length; i++) {
-            assertEquals(function2.toString(), function.toString());
-        }
+        assertTrue(list instanceof LinkedListTabulatedFunction);
+        assertEquals(list.toString(), list2.toString());
     }
 }

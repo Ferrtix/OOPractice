@@ -13,13 +13,10 @@ class ArrayTabulatedFunctionFactoryTest {
     @Test
     public void create() {
         TabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
-        TabulatedFunction function = factory.create(xValues, yValues);
-        ArrayTabulatedFunction function2 = new ArrayTabulatedFunction(xValues, yValues);
+        TabulatedFunction arr = factory.create(xValues, yValues);
+        ArrayTabulatedFunction arr2 = new ArrayTabulatedFunction(xValues, yValues);
 
-        assertTrue(function instanceof ArrayTabulatedFunction);
-
-        for (int i = 0; i < xValues.length; i++) {
-            assertEquals(function2.toString(), function.toString());
-        }
+        assertTrue(arr instanceof ArrayTabulatedFunction);
+        assertEquals(arr.toString(), arr2.toString());
     }
 }
