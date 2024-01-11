@@ -191,15 +191,18 @@ class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void LinkedListIteratorTestException() {
+    public void iterator() {
         Iterator<Point> iterator = linkedList.iterator();
-        LinkedListTabulatedFunction.Node node = linkedList.getNode(0);
+        LinkedListTabulatedFunction.Node node;
+
+        node = linkedList.getNode(0);
         while (iterator.hasNext()) {
             Point point = iterator.next();
             assertEquals(node.x, point.x);
             assertEquals(node.y, point.y);
             node = node.next;
         }
+
         node = linkedList.getNode(0);
         for (Point point : linkedList) {
             assertEquals(node.x, point.x);
