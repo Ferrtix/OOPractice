@@ -1,6 +1,8 @@
 package functions;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -191,5 +193,26 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         ArrayTabulatedFunction temp=new ArrayTabulatedFunction(this.xValues,this.yValues);
         temp.count=count;
         return (Object)temp;
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
+            private int i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return (i < count);
+            }
+
+            @Override
+            public Point next() {
+                if (hasNext()) {
+                    Point point = new Point(xValues[i], yValues[i]);
+                    i++;
+                    return point;
+                } else throw new NoSuchElementException();
+            }
+        };
     }
 }
