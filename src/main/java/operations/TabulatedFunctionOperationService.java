@@ -69,5 +69,19 @@ public class TabulatedFunctionOperationService {
         return doOperation(firstFunction, secondFunction, operation);
     }
 
+    public TabulatedFunction Mult(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        BiOperation operation = (u, v) -> u * v;
+        return doOperation(firstFunction, secondFunction, operation);
+    }
 
+    public TabulatedFunction Div(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
+        BiOperation operation = (u, v) -> {
+            if (v != 0) {
+                return u / v;
+            } else {
+                throw new ArithmeticException("Dividing on 0");
+            }
+        };
+        return doOperation(firstFunction, secondFunction, operation);
+    }
 }
