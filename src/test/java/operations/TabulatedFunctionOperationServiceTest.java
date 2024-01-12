@@ -27,13 +27,13 @@ class TabulatedFunctionOperationServiceTest {
 
     double[] xValues = {1, 2, 3, 4};
     double[] yValues = {2, 3, 1, 2};
-    LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(xValues, yValues);
+    ArrayTabulatedFunction list = new ArrayTabulatedFunction(xValues, yValues);
     double[] xValues2 = {1, 2, 3, 4};
     double[] yValues2 = {2, 2, 2, 4};
     LinkedListTabulatedFunction list1 = new LinkedListTabulatedFunction(xValues2, yValues2);
     TabulatedFunctionOperationService operation = new TabulatedFunctionOperationService();
     @Test
-    public void addTest() {
+    public void Add() {
         TabulatedFunction func = operation.Add(list, list1);
         for (int i = 0; i != func.GetCount(); i++) {
             assertEquals(yValues[i] + yValues2[i], func.getY(i));
@@ -41,14 +41,14 @@ class TabulatedFunctionOperationServiceTest {
     }
 
     @Test
-    void sub() {
+    void Sub() {
         TabulatedFunction func = operation.Sub(list, list1);
         for (int i = 0; i != func.GetCount(); i++) {
             assertEquals(yValues[i] - yValues2[i], func.getY(i));
         }
     }
     @Test
-    public void mult() {
+    public void Mult() {
         TabulatedFunction func = operation.Mult(list, list1);
         for (int i = 0; i != func.GetCount(); i++) {
             assertEquals(yValues[i] * yValues2[i], func.getY(i));
@@ -56,7 +56,7 @@ class TabulatedFunctionOperationServiceTest {
     }
 
     @Test
-    public void div() {
+    public void Div() {
         TabulatedFunction func = operation.Div(list, list1);
         for (int i = 0; i != func.GetCount(); i++) {
             assertEquals(yValues[i] / yValues2[i], func.getY(i));

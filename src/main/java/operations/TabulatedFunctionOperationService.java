@@ -38,11 +38,7 @@ public class TabulatedFunctionOperationService {
     }
     private TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation)  {
         if (a.GetCount() !=  b.GetCount())
-            try {
-                throw new InconsistentFunctionsException("different lengths of functions arrays");
-            } catch (InconsistentFunctionsException e) {
-                throw new RuntimeException(e);
-            }
+            throw new InconsistentFunctionsException("different lengths of functions arrays");
 
         Point[] pointsA = asPoints(a);
         Point[] pointsB = asPoints(b);
@@ -60,28 +56,27 @@ public class TabulatedFunctionOperationService {
     }
 
 
-    public TabulatedFunction Add(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
-        BiOperation operation = (u, v) -> u + v;
-        return doOperation(firstFunction, secondFunction, operation);
+    public TabulatedFunction Add(TabulatedFunction f, TabulatedFunction g) {
+        BiOperation operation = (a, b) -> a + b;
+        return doOperation(f, g, operation);
     }
-    public TabulatedFunction Sub(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
-        BiOperation operation = (u, v) -> u - v;
-        return doOperation(firstFunction, secondFunction, operation);
-    }
-
-    public TabulatedFunction Mult(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
-        BiOperation operation = (u, v) -> u * v;
-        return doOperation(firstFunction, secondFunction, operation);
+    public TabulatedFunction Sub(TabulatedFunction f, TabulatedFunction g) {
+        BiOperation operation = (a, b) -> a - b;
+        return doOperation(f, g, operation);
     }
 
-    public TabulatedFunction Div(TabulatedFunction firstFunction, TabulatedFunction secondFunction) {
-        BiOperation operation = (u, v) -> {
-            if (v != 0) {
-                return u / v;
-            } else {
+    public TabulatedFunction Mult(TabulatedFunction f, TabulatedFunction g) {
+        BiOperation operation = (a, b) -> a * b;
+        return doOperation(f, g, operation);
+    }
+
+    public TabulatedFunction Div(TabulatedFunction f, TabulatedFunction g) {
+        BiOperation operation = (a, b) -> {
+            if (b != 0)
+                return a / b;
+            else
                 throw new ArithmeticException("Dividing on 0");
-            }
         };
-        return doOperation(firstFunction, secondFunction, operation);
+        return doOperation(f, g, operation);
     }
 }
