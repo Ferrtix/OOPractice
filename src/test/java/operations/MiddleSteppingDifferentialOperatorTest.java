@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MiddleSteppingDifferentialOperatorTest {
+class SteppingDifferentialOperatorTest {
     MathFunction sqr = new SqrFunction();
     @Test
     public void LeftSteppingDifferentialOperatorTest() {
