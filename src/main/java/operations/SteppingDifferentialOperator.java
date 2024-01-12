@@ -10,7 +10,7 @@ public abstract class SteppingDifferentialOperator implements DifferentialOperat
 
     public SteppingDifferentialOperator(double step) {
         this.step = step;
-        if ((step < 1|| step == POSITIVE_INFINITY|| step == NaN))
+        if (step < 0|| step == POSITIVE_INFINITY|| step == NaN)
             throw new IllegalArgumentException();
     }
     public double getStep() {
