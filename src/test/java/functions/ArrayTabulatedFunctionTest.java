@@ -5,6 +5,8 @@ import exceptions.DifferentLengthOfArraysException;
 import exceptions.InterpolationException;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayTabulatedFunctionTest {
@@ -161,5 +163,23 @@ class ArrayTabulatedFunctionTest {
     void testClone() {
         Object Clone = Array.clone();
         assertEquals(Array, Clone);
+    }
+
+    @Test
+    void iterator() {
+        Iterator<Point> iterator = Array.iterator();
+        int i=0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(x[i], point.x);
+            assertEquals(y[i], point.y);
+            ++i;
+        }
+        i=0;
+        for (Point point : Array) {
+            assertEquals(x[i], point.x);
+            assertEquals(y[i], point.y);
+            ++i;
+        }
     }
 }
