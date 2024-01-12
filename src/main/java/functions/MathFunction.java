@@ -1,6 +1,6 @@
 package functions;
 
-interface MathFunction {
+public interface MathFunction {
     double apply(double x);
 
      default CompositeFunction andThen(MathFunction afterFunction){
