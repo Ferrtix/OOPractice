@@ -2,8 +2,6 @@ package functions;
 import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
 
-import java.io.ObjectInputStream;
-
 public abstract class AbstractTabulatedFunction {
     abstract protected int floorIndexOfX(double x);
 
@@ -25,20 +23,20 @@ public abstract class AbstractTabulatedFunction {
             if(xValues[i]>xValues[i+1])throw new ArrayIsNotSortedException();
         }
     }
-//
-//    public String toString(){
-//        StringBuilder str = new StringBuilder();;
-//        str.append(getClass().getSimpleName());
-//        str.append(" size = ");
-//        str.append(GetCount());
-//        str.append("\n");
-//        for (Point point : this) {
-//            str.append("[");
-//            str.append(point.x);
-//            str.append("; ");
-//            str.append(point.y);
-//            str.append("]\n");
-//        }
-//        return str.toString();
-//    }
+
+    public String toString(){
+        StringBuilder str = new StringBuilder();;
+        str.append(getClass().getSimpleName());
+        str.append(" size = ");
+        str.append(getCount());
+        str.append("\n");
+        for (Point point : this) {
+            str.append("[");
+            str.append(point.x);
+            str.append("; ");
+            str.append(point.y);
+            str.append("]\n");
+        }
+        return str.toString();
+    }
 }
