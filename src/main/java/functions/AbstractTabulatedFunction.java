@@ -3,6 +3,7 @@ import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
 
 public abstract class AbstractTabulatedFunction {
+    protected int count;
     abstract protected int floorIndexOfX(double x);
 
     abstract protected double extrapolateLeft(double x);
@@ -22,21 +23,5 @@ public abstract class AbstractTabulatedFunction {
         for(int i=0;i<xValues.length-1;++i){
             if(xValues[i]>xValues[i+1])throw new ArrayIsNotSortedException();
         }
-    }
-
-    public String toString(){
-        StringBuilder str = new StringBuilder();;
-        str.append(getClass().getSimpleName());
-        str.append(" size = ");
-        str.append(getCount());
-        str.append("\n");
-        for (Point point : this) {
-            str.append("[");
-            str.append(point.x);
-            str.append("; ");
-            str.append(point.y);
-            str.append("]\n");
-        }
-        return str.toString();
     }
 }

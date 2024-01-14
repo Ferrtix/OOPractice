@@ -2,16 +2,18 @@ package functions;
 
 import exceptions.InterpolationException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction{
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements TabulatedFunction, Serializable {
 
     private double[] xValues;
     private double[] yValues;
+    private static final long serialVersionUID = 1234L;
 
     private int count;
 
