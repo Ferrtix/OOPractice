@@ -60,8 +60,8 @@ class SynchronizedTabulatedFunctionTest {
     @Test
     public void iterator() {
         Iterator<Point> iterator = synchronizedFunction.iterator();
-        int i = 0;
-        for (; iterator.hasNext(); i++) {
+
+        for (int i = 0; iterator.hasNext(); i++) {
             Point point = iterator.next();
             assertEquals(xValues[i], point.x);
             assertEquals(yValues[i], point.y);
