@@ -42,14 +42,14 @@ class TabulatedDifferentialOperatorTest {
     @Test
     public void deriveSynchronously() {
         double[] xValues = {1, 2, 3, 4};
-        double[] yValues = {1, 1, 1, 1};
+        double[] yValues = {1, 4, 9, 16};
         LinkedListTabulatedFunctionFactory factory = new LinkedListTabulatedFunctionFactory();
         TabulatedDifferentialOperator operation = new TabulatedDifferentialOperator(factory);
         LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(xValues, yValues);
         TabulatedFunction function = operation.deriveSynchronously(list);
-        assertEquals(0, function.getY(0));
-        assertEquals(0, function.getY(1));
-        assertEquals(0, function.getY(2));
-        assertEquals(0, function.getY(3));
+        assertEquals(3, function.getY(0));
+        assertEquals(5, function.getY(1));
+        assertEquals(7, function.getY(2));
+        assertEquals(7, function.getY(3));
     }
 }

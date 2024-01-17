@@ -28,27 +28,57 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
-        if(count < 2)
+        if (count < 2) {
             throw new IllegalArgumentException("length less than 2");
-        if(xFrom>xTo) {double temp=xFrom;xFrom=xTo;xTo=temp;}
-        this.xValues=new double[count];
-        this.yValues=new double[count];
-        if(xFrom==xTo){
-           for(int i=0;i<count;++i)
-           {
-               this.xValues[i]=xFrom;
-               this.yValues[i]=source.apply(xFrom);
-           }
-        }else{
-        double step = (xTo-xFrom)/(count-1);
-        int i=0;
-        for(double x=xFrom;x<=(xTo+step/2);x+=step){
+        } else {
+            xValues = new double[count];
+            yValues = new double[count];
+            this.count = count;
 
-            this.xValues[i]=x;
-            this.yValues[i]=source.apply(x);
-            ++i;
+            if(xFrom==xTo){
+                for(int i=0; i<count; ++i)
+                {
+                    xValues[i]=xFrom;
+                    yValues[i]=source.apply(xFrom);
+                }
+                return;
+            }
+            if (xFrom > xTo) {
+                double temp = xFrom;
+                xFrom = xTo;
+                xTo = temp;
+            }
+            double step = (xTo - xFrom) / (count - 1);
+            double x = xFrom;
+
+            for (int i = 0; i < count; i++) {
+                xValues[i] = x;
+                yValues[i] = source.apply(x);
+                x += step;
             }
         }
+
+//        if(count < 2)
+//            throw new IllegalArgumentException("length less than 2");
+//        if(xFrom>xTo) {double temp=xFrom;xFrom=xTo;xTo=temp;}
+//        this.xValues=new double[count];
+//        this.yValues=new double[count];
+//        if(xFrom==xTo){
+//           for(int i=0;i<count;++i)
+//           {
+//               this.xValues[i]=xFrom;
+//               this.yValues[i]=source.apply(xFrom);
+//           }
+//        }else{
+//        double step = (xTo-xFrom)/(count-1);
+//        int i=0;
+//        for(double x=xFrom;x<=(xTo+step/2);x+=step){
+//
+//            this.xValues[i]=x;
+//            this.yValues[i]=source.apply(x);
+//            ++i;
+//            }
+//        }
     }
 
     @Override
@@ -163,9 +193,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
 
     public String toString(){
+        if(this.count == 0) {
+            return "empty";
+        }
+
         String str="";
         for(int i=0;i<this.count;++i){
-            str+= "("+String.valueOf(this.xValues[i])+","+String.valueOf(this.yValues[i])+")";
+            str+= "("+String.valueOf(this.xValues[i])+", "+String.valueOf(this.yValues[i])+") ";
         }
         return str;
     }
